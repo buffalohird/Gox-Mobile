@@ -1,5 +1,5 @@
 //
-//  MenuButtonView.h
+//  BalanceView.h
 //  mtgox
 //
 //  Created by Buffalo Hird on 7/21/13.
@@ -8,14 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
+#import "BalanceViewItem.h"
 
-@interface MenuButtonView : UIButton {
-    CALayer *highlightLayer;
-    
-}
+@interface BalanceView : UIView
 
-- (void)createHighlightLayer;
-- (void)setHighlighted:(BOOL)highlight;
+- (BalanceView *)setUp;
 - (void)createBorder;
+- (BalanceViewItem *)addBalanceItem:(int)index withPosY:(float)posY;
 
 @end

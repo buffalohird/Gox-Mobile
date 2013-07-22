@@ -10,8 +10,7 @@
 #import "MenuButtonView.h"
 
 @interface MenuView : UIView
-
  
 -(MenuView *)setUp;
--(void)addMenuButton:(float)buttonTop;
+-(MenuButtonView *)addMenuButton:(float)buttonTop withIndex:(int)index;
 @end

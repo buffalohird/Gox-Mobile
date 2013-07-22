@@ -8,6 +8,11 @@
 
 #import "MainViewController.h"
 
+#define MENUWIDTH 320.0
+#define MENUHEIGHT 200.0
+#define MENUDOWNY 44.0
+#define MENUUPY -156.0
+
 @interface MainViewController ()
 
 @end
@@ -19,8 +24,13 @@
 @synthesize navBar = _navBar;
 @synthesize currencyNavButton = _currencyNavButton;
 @synthesize menuView = _menuView;
+@synthesize balanceView = _balanceView;
+@synthesize tradeView = _tradeView;
+@synthesize calculatorView = _calculatorView;
+@synthesize aboutView = _aboutView;
 @synthesize loggedIn = _loggedIn;
 @synthesize toggleMenuBool = _toggleMenuBool;
+@synthesize toggleBalanceBool = _toggleBalanceBool;
 
 - (void)viewDidLoad
 {
@@ -28,8 +38,27 @@
 	// Do any additional setup after loading the view, typically from a nib.
     self.menuView = [[MenuView alloc] init];
     [self.menuView setUp];
-    [self.menuView setHidden:TRUE];
-    [self.view addSubview:self.menuView];
+    //[self.menuView setHidden:TRUE];
+    [self.view insertSubview:self.menuView belowSubview:self.navBar];
+    
+    MenuButtonView *newMenuButton = [self.menuView addMenuButton:0 withIndex: 0];
+    [newMenuButton addTarget:self
+                      action:@selector(presentHomeView)
+            forControlEvents:UIControlEventTouchUpInside];
+
+    newMenuButton = [self.menuView addMenuButton:MENUHEIGHT / 4 withIndex: 1];
+    [newMenuButton addTarget:self
+                      action:@selector(presentTradeView)
+            forControlEvents:UIControlEventTouchUpInside];
+    
+    newMenuButton = [self.menuView addMenuButton:MENUHEIGHT / 2 withIndex: 2];
+    [newMenuButton addTarget:self
+                      action:@selector(presentCalculatorView)
+            forControlEvents:UIControlEventTouchUpInside];
+    newMenuButton = [self.menuView addMenuButton:3 * MENUHEIGHT / 4 withIndex: 3];
+    [newMenuButton addTarget:self
+                      action:@selector(presentAboutView)
+            forControlEvents:UIControlEventTouchUpInside];
     
     
     UITapGestureRecognizer *menuTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleMenuView)];
@@ -41,25 +70,50 @@
     [navBarTapView setUserInteractionEnabled:YES];
     [navBarTapView addGestureRecognizer:menuTapGestureRecognizer];
     
+    self.balanceView = [[BalanceView alloc] init];
+    [self.balanceView setUp];
+    [self.view insertSubview:self.balanceView belowSubview:self.navBar];
+    //[self.balanceView setHidden:TRUE];
+    self.balanceView.alpha = 0;
+    
+    BalanceViewItem *newBalanceItem = [self.balanceView addBalanceItem:0 withPosY: 10.0];
+    newBalanceItem = [self.balanceView addBalanceItem:1 withPosY: 60.0];
+    newBalanceItem = [self.balanceView addBalanceItem:2 withPosY: 110.0];
+    
+    UITapGestureRecognizer *emptyTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideAllViews)];
+    menuTapGestureRecognizer.numberOfTapsRequired = 1;
+    CGRect emptyFrame = CGRectMake(0, 0, 320, 480);
+    TransparentView *emptyTapView = [[TransparentView alloc] initWithFrame:emptyFrame];
+    [self.view insertSubview:emptyTapView belowSubview: self.menuView];
+    emptyTapView.backgroundColor = [UIColor clearColor];
+    [emptyTapView setUserInteractionEnabled:YES];
+    [emptyTapView addGestureRecognizer:emptyTapGestureRecognizer];
+    
     self.bidView = [[UIScrollView alloc] init];
     self.bidView.frame = CGRectMake(0.0, 100.0, self.view.bounds.size.width, 175.0);
-    self.bidView.contentSize = CGSizeMake(400, 800);   //scroll view size
+    self.bidView.contentSize = CGSizeMake(400, 800); 
     self.bidView.backgroundColor = [UIColor grayColor];
-    self.bidView.showsVerticalScrollIndicator = YES;    // to hide scroll indicators!
-    self.bidView.showsHorizontalScrollIndicator = NO; //by default, it shows!
-    self.bidView.scrollEnabled = YES;                 //say "NO" to disable scroll
-    [self.view insertSubview:self.bidView belowSubview:self.menuView];               //adding to parent vie
+    self.bidView.showsVerticalScrollIndicator = YES;    
+    self.bidView.showsHorizontalScrollIndicator = NO; 
+    self.bidView.scrollEnabled = YES;               
+    [self.view insertSubview:self.bidView belowSubview:self.menuView];
     
     self.askView = [[UIScrollView alloc] init];
     self.askView.frame = CGRectMake(0.0, 280.0, self.view.bounds.size.width, 175.0);
-    self.askView.contentSize = CGSizeMake(400, 800);   //scroll view size
+    self.askView.contentSize = CGSizeMake(400, 800);  
     self.askView.backgroundColor = [UIColor grayColor];
-    self.askView.showsVerticalScrollIndicator = YES;    // to hide scroll indicators!
-    self.askView.showsHorizontalScrollIndicator = NO; //by default, it shows!
-    self.askView.scrollEnabled = YES;                 //say "NO" to disable scroll
+    self.askView.showsVerticalScrollIndicator = YES;    
+    self.askView.showsHorizontalScrollIndicator = NO; 
+    self.askView.scrollEnabled = YES;                 
     [self.view insertSubview:self.askView belowSubview:self.menuView];
     
+    self.tradeView = [self createTradeView];
+    self.calculatorView = [self createCalculatorView];
+    self.aboutView = [self createAboutView];
     
+    [self.view insertSubview:self.tradeView belowSubview:self.menuView];
+    [self.view insertSubview:self.calculatorView belowSubview:self.menuView];
+    [self.view insertSubview:self.aboutView belowSubview:self.menuView];
     
     
     NSString *newKey = @"new key";
@@ -76,7 +130,7 @@
 - (IBAction)currencyNavButtonPressed:(id)sender
 {
     if(self.loggedIn){
-        [self showBalances];
+        [self displayBalances];
     }
     else
         [self presentLogin];
@@ -93,16 +147,47 @@
 }
 
 
-- (void)showBalances
+- (void)displayBalances
 {
-    
+    if(self.toggleBalanceBool){
+        NSLog(@"hiding balance view");
+        [self hideMenu];
+        [self hideBalance];
+        
+    }
+    else {
+        NSLog(@"showing balance view");
+        [self hideMenu];
+        [self showBalance];
+    }
     
     
 }
 
+- (void)showBalance
+{
+    self.toggleBalanceBool = TRUE;
+    //[self.balanceView setHidden:FALSE];
+    
+    [UIView animateWithDuration:0.33 animations:^{
+     self.balanceView.alpha = 1;
+     }];
+}
+
+- (void)hideBalance
+{
+    self.toggleBalanceBool = FALSE;
+    //[self.balanceView setHidden:TRUE];
+    [UIView animateWithDuration:0.33 animations:^{
+        self.balanceView.alpha = 0;
+    }];
+}
+
 - (void)presentLogin
 {
-    
+    LoginViewController *loginViewController = [[LoginViewController alloc] init];
+    loginViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentViewController:loginViewController animated:YES completion:nil];
     
     
 }
@@ -111,21 +196,151 @@
 {
     if(self.toggleMenuBool){
         NSLog(@"hiding menu view");
-        self.toggleMenuBool = FALSE;
-        [self.menuView setHidden:FALSE];
-        
+        [self hideBalance];
+        [self hideMenu];
     }
     else {
         NSLog(@"showing menu view");
-        self.toggleMenuBool = TRUE;
-        [self.menuView setHidden:TRUE];
+        [self hideBalance];
+        [self showMenu];
     }
     
     
 }
 
+-(void)showMenu
+{
+    self.toggleMenuBool = TRUE;
+    
+    [UIView beginAnimations:@"MoveView" context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    [UIView setAnimationDuration:0.4f];
+    self.menuView.frame = CGRectMake(0.0, MENUDOWNY, MENUWIDTH, MENUHEIGHT);
+    [UIView commitAnimations];
+    
+    /*[UIView animateWithDuration:0.5 animations:^{
+     self.menuView.alpha = 1;
+     }];*/
+    
+    
+}
 
+-(void)hideMenu
+{
+    self.toggleMenuBool = FALSE;
+    
+    [UIView beginAnimations:@"MoveView" context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    [UIView setAnimationDuration:0.4f];
+    self.menuView.frame = CGRectMake(0.0, MENUUPY, MENUWIDTH, MENUHEIGHT);
+    
+    /*[UIView animateWithDuration:0.5 animations:^{
+     self.menuView.alpha = 0;
+     }];*/
+}
 
+-(void)hideAllViews
+{
+    [self hideMenu];
+    [self hideBalance];
+    
+}
+
+- (void)presentHomeView
+{
+    [self hideAllViews];
+    [self hideAllFullViews];
+    self.navBar.topItem.title = @"Gox Mobile";
+    
+    
+}
+- (void)presentTradeView
+{
+    [self hideAllViews];
+    [self hideAllFullViews];
+    self.navBar.topItem.title = @"Trade";
+    [self.tradeView setHidden:NO];
+    
+    
+}
+- (void)presentCalculatorView
+{
+    [self hideAllViews];
+    [self hideAllFullViews];
+    [self.calculatorView setHidden:NO];
+    self.navBar.topItem.title = @"Calculator";
+    
+}
+- (void)presentAboutView
+{
+    [self hideAllViews];
+    [self hideAllFullViews];
+    [self.aboutView setHidden:NO];
+    self.navBar.topItem.title = @"About";
+    
+    
+}
+
+- (void)hideAllFullViews
+{
+    [self.tradeView setHidden:YES];
+    [self.calculatorView setHidden:YES];
+    [self.aboutView setHidden:YES];
+    
+}
+
+- (UIView *)createTradeView
+{
+    UIView *newTradeView = [[UIView alloc] init];
+    newTradeView.frame = CGRectMake(0.0, 44.0, 320.0, 436.0);
+    newTradeView.backgroundColor = [UIColor redColor];
+    
+    
+    [newTradeView setHidden:YES];
+    return newTradeView;
+}
+
+- (UIView *)createCalculatorView
+{
+    UIView *newCalculatorView = [[UIView alloc] init];
+    newCalculatorView.frame = CGRectMake(0.0, 44.0, 320.0, 436.0);
+    newCalculatorView.backgroundColor = [UIColor blackColor];
+    
+    UILabel *calculatorValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 300.0, 40.0)];
+    calculatorValueLabel.text = @"  $40.0355555";
+    calculatorValueLabel.font = [UIFont boldSystemFontOfSize:14];
+    calculatorValueLabel.textColor = [UIColor whiteColor];
+    calculatorValueLabel.backgroundColor = [UIColor blackColor];
+    [newCalculatorView addSubview:calculatorValueLabel];
+    
+    calculatorValueLabel.layer.cornerRadius = 4.0f;
+    calculatorValueLabel.layer.masksToBounds = YES;
+    calculatorValueLabel.layer.borderWidth = 2.0f;
+    calculatorValueLabel.layer.borderColor = [[UIColor darkGrayColor] CGColor];
+    
+    for(int i = 0; i < 10; i++) {
+        CalculatorButtonView *newCalculatorButton = [[CalculatorButtonView alloc] init];
+        [newCalculatorButton setUp:i];
+        [newCalculatorView addSubview:newCalculatorButton];
+    }
+    
+    
+    [newCalculatorView setHidden:YES];
+    return newCalculatorView;
+    
+}
+
+- (UIView *)createAboutView
+{
+    UIView *newAboutView = [[UIView alloc] init];
+    newAboutView.frame = CGRectMake(0.0, 44.0, 320.0, 436.0);
+    newAboutView.backgroundColor = [UIColor greenColor];
+    
+    [newAboutView setHidden:YES];
+    return newAboutView;
+    
+    
+}
 
 
 

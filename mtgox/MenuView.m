@@ -24,25 +24,56 @@
 
 - (MenuView *)setUp
 {
-    self.frame = CGRectMake(0, 44, MENUWIDTH, MENUHEIGHT);
+    self.frame = CGRectMake(0, -156.0, MENUWIDTH, MENUHEIGHT);
     self.backgroundColor = [UIColor whiteColor];
     
-    [self addMenuButton:0];
-    [self addMenuButton:MENUHEIGHT / 4];
-    [self addMenuButton:MENUHEIGHT / 2];
-    [self addMenuButton:3 * MENUHEIGHT / 4];
-
     return self;
 }
 
-- (void)addMenuButton:(float)buttonTop
+- (MenuButtonView *)addMenuButton:(float)buttonTop withIndex:(int)index
 {
     MenuButtonView *newMenuButton = [[MenuButtonView alloc] init];
-    newMenuButton.frame = CGRectMake(0, buttonTop, MENUWIDTH, MENUHEIGHT / 4);
-    newMenuButton.backgroundColor = [UIColor greenColor];
+    float newMenuButtonHeight = MENUHEIGHT / 4 - 5;
+    newMenuButton.frame = CGRectMake(0, buttonTop, MENUWIDTH, newMenuButtonHeight);
+    newMenuButton.backgroundColor = [UIColor darkGrayColor];
+    [newMenuButton createHighlightLayer];
+    [newMenuButton createBorder];
     
+    NSString *menuButtonText;
+    switch(index){
+        case 0:
+            menuButtonText = @"Home";
+            break;
+        case 1:
+            menuButtonText = @"Trade";
+            break;
+        case 2:
+            menuButtonText = @"Calculator";
+            break;
+        case 3:
+            menuButtonText = @"About";
+            break;
+        default:
+            NSLog(@"invalid index for MenuViewButton");
+            break;
+    }
+    
+    UILabel *menuButtonLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, MENUWIDTH, newMenuButtonHeight)];
+    menuButtonLabel.text = menuButtonText;;
+    menuButtonLabel.textColor = [UIColor whiteColor];
+    menuButtonLabel.backgroundColor = [UIColor clearColor];
+    menuButtonLabel.textAlignment = UITextAlignmentCenter;
+    [newMenuButton addSubview:menuButtonLabel];
+        
     [self addSubview:newMenuButton];
     
+    UIView *newMenuButtonBottom = [[UIView alloc] init];
+    newMenuButtonBottom.frame = CGRectMake(0.0, buttonTop + newMenuButtonHeight, MENUWIDTH, MENUHEIGHT / 4 - newMenuButtonHeight);
+    newMenuButtonBottom.backgroundColor = [UIColor blackColor];
+    
+    [self addSubview:newMenuButtonBottom];
+    
+    return newMenuButton;
 }
 
 /*

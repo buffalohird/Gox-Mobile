@@ -31,6 +31,13 @@
 		9EA368C4179C620800289662 /* mtgoxTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA368C3179C620800289662 /* mtgoxTests.m */; };
 		9EA368CF179C633F00289662 /* MtGox.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA368CE179C633F00289662 /* MtGox.m */; };
 		9EA368D3179C737800289662 /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EA368D2179C737800289662 /* Order.m */; };
+		9EB4832D179C9BC800B2FC65 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4832B179C9BC800B2FC65 /* LoginViewController.m */; };
+		9EB4832E179C9BC800B2FC65 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9EB4832C179C9BC800B2FC65 /* LoginViewController.xib */; };
+		9EB48331179CA53600B2FC65 /* BalanceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB48330179CA53600B2FC65 /* BalanceView.m */; };
+		9EB48333179CA75100B2FC65 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EB48332179CA75100B2FC65 /* QuartzCore.framework */; };
+		9EB48336179CD09400B2FC65 /* BalanceViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB48335179CD09400B2FC65 /* BalanceViewItem.m */; };
+		9EB48339179CE7A800B2FC65 /* TransparentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB48338179CE7A800B2FC65 /* TransparentView.m */; };
+		9EB4833C179CE9E500B2FC65 /* CalculatorButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4833B179CE9E500B2FC65 /* CalculatorButtonView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +85,18 @@
 		9EA368CE179C633F00289662 /* MtGox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MtGox.m; sourceTree = "<group>"; };
 		9EA368D1179C737800289662 /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
 		9EA368D2179C737800289662 /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		9EB4832A179C9BC800B2FC65 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		9EB4832B179C9BC800B2FC65 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		9EB4832C179C9BC800B2FC65 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		9EB4832F179CA53600B2FC65 /* BalanceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceView.h; sourceTree = "<group>"; };
+		9EB48330179CA53600B2FC65 /* BalanceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceView.m; sourceTree = "<group>"; };
+		9EB48332179CA75100B2FC65 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		9EB48334179CD09400B2FC65 /* BalanceViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BalanceViewItem.h; sourceTree = "<group>"; };
+		9EB48335179CD09400B2FC65 /* BalanceViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BalanceViewItem.m; sourceTree = "<group>"; };
+		9EB48337179CE7A800B2FC65 /* TransparentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransparentView.h; sourceTree = "<group>"; };
+		9EB48338179CE7A800B2FC65 /* TransparentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentView.m; sourceTree = "<group>"; };
+		9EB4833A179CE9E400B2FC65 /* CalculatorButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorButtonView.h; sourceTree = "<group>"; };
+		9EB4833B179CE9E500B2FC65 /* CalculatorButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorButtonView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EB48333179CA75100B2FC65 /* QuartzCore.framework in Frameworks */,
 				9EA3688A179C620800289662 /* UIKit.framework in Frameworks */,
 				9EA3688C179C620800289662 /* Foundation.framework in Frameworks */,
 				9EA3688E179C620800289662 /* CoreGraphics.framework in Frameworks */,
@@ -113,6 +133,14 @@
 				9E3C341B179C8F6200F3BC3A /* MenuView.m */,
 				9E3C341E179C990400F3BC3A /* MenuButtonView.h */,
 				9E3C341F179C990400F3BC3A /* MenuButtonView.m */,
+				9EB4832F179CA53600B2FC65 /* BalanceView.h */,
+				9EB48330179CA53600B2FC65 /* BalanceView.m */,
+				9EB48334179CD09400B2FC65 /* BalanceViewItem.h */,
+				9EB48335179CD09400B2FC65 /* BalanceViewItem.m */,
+				9EB48337179CE7A800B2FC65 /* TransparentView.h */,
+				9EB48338179CE7A800B2FC65 /* TransparentView.m */,
+				9EB4833A179CE9E400B2FC65 /* CalculatorButtonView.h */,
+				9EB4833B179CE9E500B2FC65 /* CalculatorButtonView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -120,6 +148,7 @@
 		9EA3687D179C620800289662 = {
 			isa = PBXGroup;
 			children = (
+				9EB48332179CA75100B2FC65 /* QuartzCore.framework */,
 				9EA36891179C620800289662 /* mtgox */,
 				9EA368BC179C620800289662 /* mtgoxTests */,
 				9EA36888179C620800289662 /* Frameworks */,
@@ -157,6 +186,9 @@
 				9EA368A3179C620800289662 /* MainStoryboard.storyboard */,
 				9EA368A9179C620800289662 /* MainViewController.h */,
 				9EA368AA179C620800289662 /* MainViewController.m */,
+				9EB4832A179C9BC800B2FC65 /* LoginViewController.h */,
+				9EB4832B179C9BC800B2FC65 /* LoginViewController.m */,
+				9EB4832C179C9BC800B2FC65 /* LoginViewController.xib */,
 				9E3C341D179C8F7100F3BC3A /* Views */,
 				9EA368AC179C620800289662 /* FlipsideViewController.h */,
 				9EA368AD179C620800289662 /* FlipsideViewController.m */,
@@ -286,6 +318,7 @@
 				9EA368A0179C620800289662 /* Default@2x.png in Resources */,
 				9EA368A2179C620800289662 /* Default-568h@2x.png in Resources */,
 				9EA368A5179C620800289662 /* MainStoryboard.storyboard in Resources */,
+				9EB4832E179C9BC800B2FC65 /* LoginViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -329,6 +362,11 @@
 				9EA368D3179C737800289662 /* Order.m in Sources */,
 				9E3C341C179C8F6200F3BC3A /* MenuView.m in Sources */,
 				9E3C3420179C990400F3BC3A /* MenuButtonView.m in Sources */,
+				9EB4832D179C9BC800B2FC65 /* LoginViewController.m in Sources */,
+				9EB48331179CA53600B2FC65 /* BalanceView.m in Sources */,
+				9EB48336179CD09400B2FC65 /* BalanceViewItem.m in Sources */,
+				9EB48339179CE7A800B2FC65 /* TransparentView.m in Sources */,
+				9EB4833C179CE9E500B2FC65 /* CalculatorButtonView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
