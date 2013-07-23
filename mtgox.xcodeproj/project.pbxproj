@@ -38,6 +38,7 @@
 		9EB48336179CD09400B2FC65 /* BalanceViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB48335179CD09400B2FC65 /* BalanceViewItem.m */; };
 		9EB48339179CE7A800B2FC65 /* TransparentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB48338179CE7A800B2FC65 /* TransparentView.m */; };
 		9EB4833C179CE9E500B2FC65 /* CalculatorButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4833B179CE9E500B2FC65 /* CalculatorButtonView.m */; };
+		9EBEE732179E1EDA0037F6A0 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEE731179E1EDA0037F6A0 /* CalculatorView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,6 +98,8 @@
 		9EB48338179CE7A800B2FC65 /* TransparentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransparentView.m; sourceTree = "<group>"; };
 		9EB4833A179CE9E400B2FC65 /* CalculatorButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorButtonView.h; sourceTree = "<group>"; };
 		9EB4833B179CE9E500B2FC65 /* CalculatorButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorButtonView.m; sourceTree = "<group>"; };
+		9EBEE730179E1EDA0037F6A0 /* CalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorView.h; sourceTree = "<group>"; };
+		9EBEE731179E1EDA0037F6A0 /* CalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +144,8 @@
 				9EB48338179CE7A800B2FC65 /* TransparentView.m */,
 				9EB4833A179CE9E400B2FC65 /* CalculatorButtonView.h */,
 				9EB4833B179CE9E500B2FC65 /* CalculatorButtonView.m */,
+				9EBEE730179E1EDA0037F6A0 /* CalculatorView.h */,
+				9EBEE731179E1EDA0037F6A0 /* CalculatorView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -367,6 +372,7 @@
 				9EB48336179CD09400B2FC65 /* BalanceViewItem.m in Sources */,
 				9EB48339179CE7A800B2FC65 /* TransparentView.m in Sources */,
 				9EB4833C179CE9E500B2FC65 /* CalculatorButtonView.m in Sources */,
+				9EBEE732179E1EDA0037F6A0 /* CalculatorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

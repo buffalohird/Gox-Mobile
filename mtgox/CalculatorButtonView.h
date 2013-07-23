@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CalculatorButtonView : UIView
+@interface CalculatorButtonView : UIButton
+
+@property (nonatomic, strong)UILabel *label;
 
 - (CalculatorButtonView *)setUp:(int)number;
 

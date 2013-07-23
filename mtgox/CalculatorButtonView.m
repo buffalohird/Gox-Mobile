@@ -14,13 +14,17 @@
 #define XPOS1 60
 #define XPOS2 130
 #define XPOS3 200
+#define XPOS4 270
 
 #define YPOS1 106
 #define YPOS2 176
 #define YPOS3 246
 #define YPOS4 316
+#define YPOS5 386
 
 @implementation CalculatorButtonView
+
+@synthesize label = _label;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -34,48 +38,93 @@
 - (CalculatorButtonView *)setUp:(int)number
 {
     int chosenXPos, chosenYPos;
+    NSString *buttonLabel;
     switch (number) {
         case 1:
             chosenXPos = XPOS1;
             chosenYPos = YPOS1;
+            buttonLabel = @"1";
             break;
         case 2:
             chosenXPos = XPOS2;
             chosenYPos = YPOS1;
+            buttonLabel = @"2";
             break;
         case 3:
             chosenXPos = XPOS3;
             chosenYPos = YPOS1;
+            buttonLabel = @"3";
             break;
         case 4:
             chosenXPos = XPOS1;
             chosenYPos = YPOS2;
+            buttonLabel = @"4";
             break;
         case 5:
             chosenXPos = XPOS2;
             chosenYPos = YPOS2;
+            buttonLabel = @"5";
             break;
         case 6:
             chosenXPos = XPOS3;
             chosenYPos = YPOS2;
+            buttonLabel = @"6";
             break;
         case 7:
             chosenXPos = XPOS1;
             chosenYPos = YPOS3;
+            buttonLabel = @"7";
             break;
         case 8:
             chosenXPos = XPOS2;
             chosenYPos = YPOS3;
+            buttonLabel = @"8";
             break;
         case 9:
             chosenXPos = XPOS3;
             chosenYPos = YPOS3;
+            buttonLabel = @"9";
             break;
         case 0:
             chosenXPos = XPOS2;
             chosenYPos = YPOS4;
+            buttonLabel = @"0";
             break;
-            
+        case 10: // clear button
+            chosenXPos = XPOS1;
+            chosenYPos = YPOS4;
+            buttonLabel = @"C";
+            break;
+        case 11: // decimal button
+            chosenXPos = XPOS3;
+            chosenYPos = YPOS4;
+            buttonLabel = @".";
+            break;
+        case 12: // add button
+            chosenXPos = XPOS4;
+            chosenYPos = YPOS1;
+            buttonLabel = @"+";
+            break;
+        case 13: // subtract button
+            chosenXPos = XPOS4;
+            chosenYPos = YPOS2;
+            buttonLabel = @"-";
+            break;
+        case 14: // multiply button
+            chosenXPos = XPOS4;
+            chosenYPos = YPOS3;
+            buttonLabel = @"*";
+            break;
+        case 15: // divide button
+            chosenXPos = XPOS4;
+            chosenYPos = YPOS4;
+            buttonLabel = @"/";
+            break;
+        case 16: // divide button
+            chosenXPos = XPOS2;
+            chosenYPos = YPOS5;
+            buttonLabel = @"Enter";
+            break;
         default:
             NSLog(@"invalid digit given to CalculatorButtonView's Setup");
             break;
@@ -84,6 +133,12 @@
     self.frame = CGRectMake(chosenXPos, chosenYPos, BUTTONWIDTH, BUTTONHEIGHT);
     self.backgroundColor = [UIColor grayColor];
     
+    self.label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, BUTTONWIDTH, BUTTONHEIGHT)];
+    self.label.text = buttonLabel;
+    self.label.backgroundColor = [UIColor clearColor];
+    self.label.textAlignment = UITextAlignmentCenter;
+    
+    [self addSubview:self.label];
     
     return self;
 }

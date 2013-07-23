@@ -108,7 +108,10 @@
     [self.view insertSubview:self.askView belowSubview:self.menuView];
     
     self.tradeView = [self createTradeView];
-    self.calculatorView = [self createCalculatorView];
+    
+    self.calculatorView = [[CalculatorView alloc] init];
+    [self.calculatorView createCalculatorView];
+    
     self.aboutView = [self createAboutView];
     
     [self.view insertSubview:self.tradeView belowSubview:self.menuView];
@@ -300,36 +303,6 @@
     return newTradeView;
 }
 
-- (UIView *)createCalculatorView
-{
-    UIView *newCalculatorView = [[UIView alloc] init];
-    newCalculatorView.frame = CGRectMake(0.0, 44.0, 320.0, 436.0);
-    newCalculatorView.backgroundColor = [UIColor blackColor];
-    
-    UILabel *calculatorValueLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 300.0, 40.0)];
-    calculatorValueLabel.text = @"  $40.0355555";
-    calculatorValueLabel.font = [UIFont boldSystemFontOfSize:14];
-    calculatorValueLabel.textColor = [UIColor whiteColor];
-    calculatorValueLabel.backgroundColor = [UIColor blackColor];
-    [newCalculatorView addSubview:calculatorValueLabel];
-    
-    calculatorValueLabel.layer.cornerRadius = 4.0f;
-    calculatorValueLabel.layer.masksToBounds = YES;
-    calculatorValueLabel.layer.borderWidth = 2.0f;
-    calculatorValueLabel.layer.borderColor = [[UIColor darkGrayColor] CGColor];
-    
-    for(int i = 0; i < 10; i++) {
-        CalculatorButtonView *newCalculatorButton = [[CalculatorButtonView alloc] init];
-        [newCalculatorButton setUp:i];
-        [newCalculatorView addSubview:newCalculatorButton];
-    }
-    
-    
-    [newCalculatorView setHidden:YES];
-    return newCalculatorView;
-    
-}
-
 - (UIView *)createAboutView
 {
     UIView *newAboutView = [[UIView alloc] init];
@@ -341,7 +314,6 @@
     
     
 }
-
 
 
 - (void)didReceiveMemoryWarning
