@@ -19,7 +19,7 @@
 @property (nonatomic) int trailingZeroes;
 @property (nonatomic) int currentOperation;
 @property (nonatomic) BOOL decimal;
-@property (nonatomic) int decimalCount;
+@property (nonatomic) int decimalCount; // how many displayed
 
 - (CalculatorView *)createCalculatorView;
 - (int) calculatorButtonPressed:(CalculatorButtonView *)pressedButton;

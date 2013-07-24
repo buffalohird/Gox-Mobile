@@ -39,6 +39,8 @@
 		9EB48339179CE7A800B2FC65 /* TransparentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB48338179CE7A800B2FC65 /* TransparentView.m */; };
 		9EB4833C179CE9E500B2FC65 /* CalculatorButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EB4833B179CE9E500B2FC65 /* CalculatorButtonView.m */; };
 		9EBEE732179E1EDA0037F6A0 /* CalculatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEE731179E1EDA0037F6A0 /* CalculatorView.m */; };
+		9EBEE735179F8B430037F6A0 /* AboutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEE734179F8B430037F6A0 /* AboutView.m */; };
+		9EBEE738179F8C170037F6A0 /* TradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBEE737179F8C170037F6A0 /* TradeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,10 @@
 		9EB4833B179CE9E500B2FC65 /* CalculatorButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorButtonView.m; sourceTree = "<group>"; };
 		9EBEE730179E1EDA0037F6A0 /* CalculatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalculatorView.h; sourceTree = "<group>"; };
 		9EBEE731179E1EDA0037F6A0 /* CalculatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalculatorView.m; sourceTree = "<group>"; };
+		9EBEE733179F8B420037F6A0 /* AboutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutView.h; sourceTree = "<group>"; };
+		9EBEE734179F8B430037F6A0 /* AboutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutView.m; sourceTree = "<group>"; };
+		9EBEE736179F8C160037F6A0 /* TradeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeView.h; sourceTree = "<group>"; };
+		9EBEE737179F8C170037F6A0 /* TradeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,10 @@
 				9EB4833B179CE9E500B2FC65 /* CalculatorButtonView.m */,
 				9EBEE730179E1EDA0037F6A0 /* CalculatorView.h */,
 				9EBEE731179E1EDA0037F6A0 /* CalculatorView.m */,
+				9EBEE733179F8B420037F6A0 /* AboutView.h */,
+				9EBEE734179F8B430037F6A0 /* AboutView.m */,
+				9EBEE736179F8C160037F6A0 /* TradeView.h */,
+				9EBEE737179F8C170037F6A0 /* TradeView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -373,6 +383,8 @@
 				9EB48339179CE7A800B2FC65 /* TransparentView.m in Sources */,
 				9EB4833C179CE9E500B2FC65 /* CalculatorButtonView.m in Sources */,
 				9EBEE732179E1EDA0037F6A0 /* CalculatorView.m in Sources */,
+				9EBEE735179F8B430037F6A0 /* AboutView.m in Sources */,
+				9EBEE738179F8C170037F6A0 /* TradeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

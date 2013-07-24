@@ -18,6 +18,8 @@
 #import "TransparentView.h"
 #import "CalculatorButtonView.h"
 #import "CalculatorView.h"
+#import "AboutView.h"
+#import "TradeView.h"
 
 @interface MainViewController : UIViewController <FlipsideViewControllerDelegate>
 
@@ -28,9 +30,10 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *currencyNavButton;
 @property (strong, nonatomic) MenuView *menuView;
 @property (strong, nonatomic) BalanceView *balanceView;
-@property (strong, nonatomic) UIView *tradeView;
+@property (strong, nonatomic) TradeView *tradeView;
 @property (strong, nonatomic) CalculatorView *calculatorView;
-@property (strong, nonatomic) UIView *aboutView;
+@property (strong, nonatomic) AboutView *aboutView;
+@property (strong, nonatomic) UIView *menuButtonView;
 
 @property (nonatomic) BOOL loggedIn;
 @property (nonatomic) BOOL toggleMenuBool;
@@ -51,9 +54,6 @@
 - (void)presentTradeView;
 - (void)presentCalculatorView;
 - (void)presentAboutView;
-- (UIView *)createTradeView;
-- (UIView *)createAboutView;
-
 
 @end
 

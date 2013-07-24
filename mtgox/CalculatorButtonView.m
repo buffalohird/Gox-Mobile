@@ -120,7 +120,7 @@
             chosenYPos = YPOS4;
             buttonLabel = @"/";
             break;
-        case 16: // divide button
+        case 16: // enter button
             chosenXPos = XPOS2;
             chosenYPos = YPOS5;
             buttonLabel = @"Enter";

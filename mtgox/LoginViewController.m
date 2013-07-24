@@ -14,6 +14,8 @@
 
 @implementation LoginViewController
 
+//@synthesize mainViewController = _mainViewController;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,6 +35,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)dismissLoginView:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 @end

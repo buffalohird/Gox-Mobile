@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainViewController.h"
 
 @interface LoginViewController : UIViewController
 
+//@property (nonatomic, strong) MainViewController *mainViewController;
+
+- (IBAction)dismissLoginView:(id)sender;
 @end

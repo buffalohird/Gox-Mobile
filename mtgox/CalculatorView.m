@@ -79,7 +79,7 @@
     if(index == 11) {
         self.decimal = YES;
         if (self.value == 0) {
-            self.valueLabel.text = [NSString stringWithFormat:@"  %f", 0.0];
+            self.valueLabel.text = [NSString stringWithFormat:@"  %f", 0.];
         }
     }
     else {

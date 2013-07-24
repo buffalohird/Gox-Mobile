@@ -28,6 +28,7 @@
 @synthesize tradeView = _tradeView;
 @synthesize calculatorView = _calculatorView;
 @synthesize aboutView = _aboutView;
+@synthesize menuButtonView = _menuButtonView;
 @synthesize loggedIn = _loggedIn;
 @synthesize toggleMenuBool = _toggleMenuBool;
 @synthesize toggleBalanceBool = _toggleBalanceBool;
@@ -36,6 +37,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
     self.menuView = [[MenuView alloc] init];
     [self.menuView setUp];
     //[self.menuView setHidden:TRUE];
@@ -61,9 +63,18 @@
             forControlEvents:UIControlEventTouchUpInside];
     
     
+    self.menuButtonView  = [[UIView alloc] init];
+    self.menuButtonView.frame = CGRectMake(5.0, 5.0, 34.0, 34.0);
+    self.menuButtonView.backgroundColor = [UIColor greenColor];
+    self.menuButtonView.layer.cornerRadius = 2.0f;
+    self.menuButtonView.layer.masksToBounds = YES;
+    self.menuButtonView.layer.borderWidth = 1.0f;
+    self.menuButtonView.layer.borderColor = [self.menuButtonView.backgroundColor CGColor];
+    [self.view insertSubview:self.menuButtonView aboveSubview:self.navBar];
+    
     UITapGestureRecognizer *menuTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleMenuView)];
     menuTapGestureRecognizer.numberOfTapsRequired = 1;
-    CGRect frame = CGRectMake(self.view.frame.size.width/4, 0, self.view.frame.size.width/2, 44);
+    CGRect frame = CGRectMake(0, 0, self.view.frame.size.width/4 * 3, 44);
     UIView *navBarTapView = [[UIView alloc] initWithFrame:frame];
     [self.view addSubview:navBarTapView];
     navBarTapView.backgroundColor = [UIColor clearColor];
@@ -107,24 +118,26 @@
     self.askView.scrollEnabled = YES;                 
     [self.view insertSubview:self.askView belowSubview:self.menuView];
     
-    self.tradeView = [self createTradeView];
+    self.tradeView = [[TradeView alloc] init];
+    [self.tradeView createTradeView];
     
     self.calculatorView = [[CalculatorView alloc] init];
     [self.calculatorView createCalculatorView];
     
-    self.aboutView = [self createAboutView];
+    self.aboutView = [[AboutView alloc] init];
+    [self.aboutView createAboutView];
     
     [self.view insertSubview:self.tradeView belowSubview:self.menuView];
     [self.view insertSubview:self.calculatorView belowSubview:self.menuView];
     [self.view insertSubview:self.aboutView belowSubview:self.menuView];
     
-    
+
     NSString *newKey = @"new key";
     NSString *newSecret = @"new secret";
     MtGox *mtGox = [[MtGox alloc] initWithKey:newKey andSecret:newSecret];
     NSLog([NSString stringWithFormat:@"Key: %@, Secret: %@", mtGox.key, mtGox.secret]);
     
-    self.loggedIn = TRUE;
+    self.loggedIn = FALSE;
     [self checkLogin];
     
 }
@@ -189,6 +202,7 @@
 - (void)presentLogin
 {
     LoginViewController *loginViewController = [[LoginViewController alloc] init];
+    //[loginViewController setMainViewController:self];
     loginViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:loginViewController animated:YES completion:nil];
     
@@ -220,12 +234,7 @@
     [UIView setAnimationDuration:0.4f];
     self.menuView.frame = CGRectMake(0.0, MENUDOWNY, MENUWIDTH, MENUHEIGHT);
     [UIView commitAnimations];
-    
-    /*[UIView animateWithDuration:0.5 animations:^{
-     self.menuView.alpha = 1;
-     }];*/
-    
-    
+       
 }
 
 -(void)hideMenu
@@ -237,9 +246,6 @@
     [UIView setAnimationDuration:0.4f];
     self.menuView.frame = CGRectMake(0.0, MENUUPY, MENUWIDTH, MENUHEIGHT);
     
-    /*[UIView animateWithDuration:0.5 animations:^{
-     self.menuView.alpha = 0;
-     }];*/
 }
 
 -(void)hideAllViews
@@ -261,8 +267,9 @@
 {
     [self hideAllViews];
     [self hideAllFullViews];
-    self.navBar.topItem.title = @"Trade";
     [self.tradeView setHidden:NO];
+    self.navBar.topItem.title = @"Trade";
+
     
     
 }
@@ -291,30 +298,6 @@
     [self.aboutView setHidden:YES];
     
 }
-
-- (UIView *)createTradeView
-{
-    UIView *newTradeView = [[UIView alloc] init];
-    newTradeView.frame = CGRectMake(0.0, 44.0, 320.0, 436.0);
-    newTradeView.backgroundColor = [UIColor redColor];
-    
-    
-    [newTradeView setHidden:YES];
-    return newTradeView;
-}
-
-- (UIView *)createAboutView
-{
-    UIView *newAboutView = [[UIView alloc] init];
-    newAboutView.frame = CGRectMake(0.0, 44.0, 320.0, 436.0);
-    newAboutView.backgroundColor = [UIColor greenColor];
-    
-    [newAboutView setHidden:YES];
-    return newAboutView;
-    
-    
-}
-
 
 - (void)didReceiveMemoryWarning
 {
