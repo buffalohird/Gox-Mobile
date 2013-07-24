@@ -11,10 +11,10 @@
 #define BUTTONWIDTH 60
 #define BUTTONHEIGHT 60
 
-#define XPOS1 60
-#define XPOS2 130
-#define XPOS3 200
-#define XPOS4 270
+#define XPOS1 25
+#define XPOS2 95
+#define XPOS3 165
+#define XPOS4 235
 
 #define YPOS1 106
 #define YPOS2 176
@@ -140,7 +140,30 @@
     
     [self addSubview:self.label];
     
+    [self createHighlightLayer];
+    
     return self;
+}
+
+- (void)createHighlightLayer
+{
+    // what happens when the user clicks. make the settings
+    highlightLayer = [CALayer layer];
+    highlightLayer.backgroundColor = [UIColor colorWithRed: 0.10f
+                                                     green: 0.10f
+                                                      blue: 0.10f
+                                                     alpha: 0.60].CGColor;
+    highlightLayer.frame = self.layer.bounds;
+    highlightLayer.hidden = YES;
+    
+    // insert it
+    [self.layer insertSublayer:highlightLayer above:self.layer];
+}
+
+- (void)setHighlighted:(BOOL)highlight
+{
+    highlightLayer.hidden = !highlight;
+    [super setHighlighted:highlight];
 }
 
 /*

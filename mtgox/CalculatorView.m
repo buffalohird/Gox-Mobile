@@ -75,10 +75,13 @@
 - (int)calculatorButtonPressed:(CalculatorButtonView *)pressedButton
 {
     int index = pressedButton.tag;
-    NSString *registerCharacter = @"";
     
-    if(index == 11)
+    if(index == 11) {
         self.decimal = YES;
+        if (self.value == 0) {
+            self.valueLabel.text = [NSString stringWithFormat:@"  %f", 0.0];
+        }
+    }
     else {
         if(self.decimal == YES) {
             self.decimalCount++;
@@ -120,6 +123,8 @@
 - (void)enterOperation:(CalculatorButtonView *)pressedOperation
 {
     int operation = pressedOperation.tag - 11;
+    if(self.previousValue != 0)
+        [self commitOperation];
     self.previousValue = self.value;
     self.value = 0;
     [self resetDecimal];
@@ -160,6 +165,11 @@
     else if(self.currentOperation == 4) {
         self.value = self.previousValue / self.value;
         self.valueLabel.text = [NSString stringWithFormat:@"  %f", self.value];
+    }
+    
+    if(self.value == INFINITY){
+        [self clearCalculator];
+        self.valueLabel.text = [NSString stringWithFormat:@"  Error: Number Too Large"];
     }
 }
 
