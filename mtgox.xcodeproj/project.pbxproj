@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		9E3C341C179C8F6200F3BC3A /* MenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3C341B179C8F6200F3BC3A /* MenuView.m */; };
 		9E3C3420179C990400F3BC3A /* MenuButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3C341F179C990400F3BC3A /* MenuButtonView.m */; };
+		9E76AF8417A2132400039ECA /* OrderViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E76AF8317A2132400039ECA /* OrderViewItem.m */; };
+		9E76AF8717A215F400039ECA /* OrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E76AF8617A215F400039ECA /* OrderView.m */; };
+		9E76AF8A17A21BA800039ECA /* OrderHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E76AF8917A21BA800039ECA /* OrderHeader.m */; };
 		9EA3688A179C620800289662 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA36889179C620800289662 /* UIKit.framework */; };
 		9EA3688C179C620800289662 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA3688B179C620800289662 /* Foundation.framework */; };
 		9EA3688E179C620800289662 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA3688D179C620800289662 /* CoreGraphics.framework */; };
@@ -58,6 +61,12 @@
 		9E3C341B179C8F6200F3BC3A /* MenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuView.m; sourceTree = "<group>"; };
 		9E3C341E179C990400F3BC3A /* MenuButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuButtonView.h; sourceTree = "<group>"; };
 		9E3C341F179C990400F3BC3A /* MenuButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuButtonView.m; sourceTree = "<group>"; };
+		9E76AF8217A2132400039ECA /* OrderViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderViewItem.h; sourceTree = "<group>"; };
+		9E76AF8317A2132400039ECA /* OrderViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderViewItem.m; sourceTree = "<group>"; };
+		9E76AF8517A215F400039ECA /* OrderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderView.h; sourceTree = "<group>"; };
+		9E76AF8617A215F400039ECA /* OrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderView.m; sourceTree = "<group>"; };
+		9E76AF8817A21BA800039ECA /* OrderHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHeader.h; sourceTree = "<group>"; };
+		9E76AF8917A21BA800039ECA /* OrderHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHeader.m; sourceTree = "<group>"; };
 		9EA36886179C620800289662 /* mtgox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mtgox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EA36889179C620800289662 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		9EA3688B179C620800289662 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -138,6 +147,10 @@
 		9E3C341D179C8F7100F3BC3A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9E76AF8517A215F400039ECA /* OrderView.h */,
+				9E76AF8617A215F400039ECA /* OrderView.m */,
+				9E76AF8817A21BA800039ECA /* OrderHeader.h */,
+				9E76AF8917A21BA800039ECA /* OrderHeader.m */,
 				9E3C341A179C8F6200F3BC3A /* MenuView.h */,
 				9E3C341B179C8F6200F3BC3A /* MenuView.m */,
 				9E3C341E179C990400F3BC3A /* MenuButtonView.h */,
@@ -156,6 +169,8 @@
 				9EBEE734179F8B430037F6A0 /* AboutView.m */,
 				9EBEE736179F8C160037F6A0 /* TradeView.h */,
 				9EBEE737179F8C170037F6A0 /* TradeView.m */,
+				9E76AF8217A2132400039ECA /* OrderViewItem.h */,
+				9E76AF8317A2132400039ECA /* OrderViewItem.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -385,6 +400,9 @@
 				9EBEE732179E1EDA0037F6A0 /* CalculatorView.m in Sources */,
 				9EBEE735179F8B430037F6A0 /* AboutView.m in Sources */,
 				9EBEE738179F8C170037F6A0 /* TradeView.m in Sources */,
+				9E76AF8417A2132400039ECA /* OrderViewItem.m in Sources */,
+				9E76AF8717A215F400039ECA /* OrderView.m in Sources */,
+				9E76AF8A17A21BA800039ECA /* OrderHeader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

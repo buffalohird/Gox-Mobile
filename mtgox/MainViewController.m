@@ -100,22 +100,22 @@
     [emptyTapView setUserInteractionEnabled:YES];
     [emptyTapView addGestureRecognizer:emptyTapGestureRecognizer];
     
-    self.bidView = [[UIScrollView alloc] init];
-    self.bidView.frame = CGRectMake(0.0, 100.0, self.view.bounds.size.width, 175.0);
-    self.bidView.contentSize = CGSizeMake(400, 800); 
-    self.bidView.backgroundColor = [UIColor grayColor];
-    self.bidView.showsVerticalScrollIndicator = YES;    
-    self.bidView.showsHorizontalScrollIndicator = NO; 
-    self.bidView.scrollEnabled = YES;               
+    self.bidView = [[OrderView alloc] init];
+    [self.bidView createOrderView:CGRectMake(0.0, 100.0, self.view.bounds.size.width, 175.0) andName:@"Bids"];
     [self.view insertSubview:self.bidView belowSubview:self.menuView];
     
-    self.askView = [[UIScrollView alloc] init];
-    self.askView.frame = CGRectMake(0.0, 280.0, self.view.bounds.size.width, 175.0);
-    self.askView.contentSize = CGSizeMake(400, 800);  
-    self.askView.backgroundColor = [UIColor grayColor];
-    self.askView.showsVerticalScrollIndicator = YES;    
-    self.askView.showsHorizontalScrollIndicator = NO; 
-    self.askView.scrollEnabled = YES;                 
+    OrderViewItem *orderViewItem = [[OrderViewItem alloc] init];
+    [orderViewItem createOrderView:CGRectMake(0.0, 40.0, 320.0, 40.0)];
+    [self.bidView addSubview:orderViewItem];
+    OrderViewItem *orderViewItem2 = [[OrderViewItem alloc] init];
+    [orderViewItem2 createOrderView:CGRectMake(0.0, 81.0, 320.0, 40.0)];
+    [self.bidView addSubview:orderViewItem2];
+    OrderViewItem *orderViewItem3 = [[OrderViewItem alloc] init];
+    [orderViewItem3 createOrderView:CGRectMake(0.0, 123.0, 320.0, 40.0)];
+    [self.bidView addSubview:orderViewItem3];
+    
+    self.askView = [[OrderView alloc] init];
+    [self.askView createOrderView:CGRectMake(0.0, 280.0, self.view.bounds.size.width, 175.0) andName:@"Asks"];
     [self.view insertSubview:self.askView belowSubview:self.menuView];
     
     self.tradeView = [[TradeView alloc] init];
