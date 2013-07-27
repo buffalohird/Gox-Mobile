@@ -52,7 +52,7 @@
 {    
     
     NSError *e = nil;
-    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:  data options: NSJSONReadingMutableContainers error: &e];
+    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData: data options: NSJSONReadingMutableContainers error: &e];
     return jsonDictionary;
 }
 

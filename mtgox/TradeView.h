@@ -12,8 +12,16 @@
 
 @interface TradeView : UIView
 
+@property (nonatomic, strong) UITextField *orderSizeInput;
+@property (nonatomic, strong) UITextField *orderPriceInput;
+@property (nonatomic, strong) UITextField *orderTotalInput;
+
+
 - (TradeView *)createTradeView;
 - (void) printQuote;
 - (void)refreshData;
+- (void) calcOrder: (UIButton *) clickedSection;
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void) cancelRecentOrder;
 
 @end
