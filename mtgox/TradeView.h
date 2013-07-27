@@ -14,5 +14,6 @@
 
 - (TradeView *)createTradeView;
 - (void) printQuote;
+- (void)refreshData;
 
 @end

@@ -12,6 +12,11 @@
 
 @interface BalanceView : UIView
 
+@property (nonatomic, strong) BalanceViewItem *currentPriceItem;
+@property (nonatomic, strong) BalanceViewItem *currentBitcoinItem;
+@property (nonatomic, strong) BalanceViewItem *currentDollarsItem;
+
+
 - (BalanceView *)setUp;
 - (void)createBorder;
 - (BalanceViewItem *)addBalanceItem:(int)index withPosY:(float)posY;

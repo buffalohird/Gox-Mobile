@@ -11,5 +11,6 @@
 @interface AboutView : UIView
 
 - (AboutView *)createAboutView;
+- (void)refreshData;
 
 @end

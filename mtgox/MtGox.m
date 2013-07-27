@@ -17,6 +17,8 @@
 @synthesize base = _base;
 @synthesize time = _time;
 
+@synthesize lastPrice = _lastPrice;
+
 // pretty stock setup function
 - (id)initWithKey:(NSString *)key andSecret:(NSString *)secret
 {
@@ -37,13 +39,64 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (int)callURL:(NSString *)urlString
+- (NSDictionary *)callURL:(NSString *)urlString
 {
     NSURL *url = [NSURL URLWithString:urlString];
     NSData *data = [NSData dataWithContentsOfURL:url];
-    NSString *ret = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"ret=%@", ret);
+    
+    NSDictionary *returnDictionary = [self handleJsonData:data];
+    return returnDictionary[@"data"];
+}
+
+- (NSDictionary *)handleJsonData:(NSData *)data
+{    
+    
+    NSError *e = nil;
+    NSDictionary *jsonDictionary = [NSJSONSerialization JSONObjectWithData:  data options: NSJSONReadingMutableContainers error: &e];
+    return jsonDictionary;
+}
+
+- (int)login
+{
+    NSString *loginStringEnd = @"BTCUSD/money/ticker_fast";
+    NSString *loginString = [NSString stringWithFormat:@"%@%@", self.base, loginStringEnd];
+    NSDictionary *returnDictionary = [self callURL:loginString];
+    
+    
     return 0;
+}
+
+- (float)currentPrice
+{
+    NSString *currentStringEnd = @"BTCUSD/money/ticker";
+    NSString *currentString = [NSString stringWithFormat:@"%@%@", self.base, currentStringEnd];
+    NSDictionary *currentDictionary = [self callURL:currentString];
+    
+    NSMutableDictionary *returnDictionary = [[NSMutableDictionary alloc] init];
+    returnDictionary[@"last"] = currentDictionary[@"last"];
+    
+    float lastPrice = [currentDictionary[@"last"][@"value"] floatValue];
+    
+    return lastPrice;
+}
+
+- (NSString *)refreshData
+{
+    self.lastPrice = [self currentPrice];
+    
+    
+    NSLog(@"hello");
+    return @"hello";
+}
+
+- (NSString *)getInfo
+{
+    NSString *infoStringEnd = @"BTCUSD/money/info";
+    NSString *infoString = [NSString stringWithFormat:@"%@%@", self.base, infoStringEnd];
+    NSDictionary *returnDictionary = [self callURL:infoString];
+    
+    
+    return @"string";
 }
 
 @end

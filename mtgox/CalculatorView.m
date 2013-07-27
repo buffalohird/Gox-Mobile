@@ -16,6 +16,7 @@
 @synthesize trailingZeroes = _trailingZeroes;
 @synthesize decimal = _decimal;
 @synthesize decimalCount = _decimalCount;
+@synthesize mtGox = _mtGox;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -26,8 +27,9 @@
     return self;
 }
 
-- (CalculatorView *)createCalculatorView
+- (CalculatorView *)createCalculatorView:(MtGox *)mtGox
 {
+    self.mtGox = mtGox;
     self.frame = CGRectMake(0.0, 44.0, 320.0, 436.0);
     self.backgroundColor = [UIColor blackColor];
     
@@ -35,7 +37,7 @@
     self.trailingZeroes = 0;
     
     self.valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, 300.0, 40.0)];
-    self.valueLabel.text = @"  $40.0355555";
+    self.valueLabel.text = [NSString stringWithFormat:@"  %f", self.mtGox.lastPrice];
     self.valueLabel.font = [UIFont boldSystemFontOfSize:14];
     self.valueLabel.textColor = [UIColor whiteColor];
     self.valueLabel.backgroundColor = [UIColor blackColor];
@@ -177,6 +179,12 @@
 {
     self.decimal = NO;
     self.decimalCount = 0;
+    
+}
+
+- (void)refreshData
+{
+    self.valueLabel.text = [NSString stringWithFormat:@"  %f", self.mtGox.lastPrice];
     
 }
 

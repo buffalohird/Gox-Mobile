@@ -17,8 +17,14 @@
 @property (strong, nonatomic) NSString* base;
 @property (strong, nonatomic) NSString* time;
 
+@property (nonatomic) float lastPrice;
+
 - (id)initWithKey:(NSString *)key andSecret:(NSString *)secret;
 
-- (int)callURL:(NSString *)urlString;
+- (NSDictionary *)callURL:(NSString *)urlString;
+- (NSDictionary *)handleJsonData:(NSData *)data;
+- (float)currentPrice;
+- (NSString *)refreshData;
+- (NSString *)getInfo;
 
 @end

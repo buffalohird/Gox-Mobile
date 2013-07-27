@@ -22,6 +22,7 @@
 #import "TradeView.h"
 #import "OrderView.h"
 #import "OrderViewItem.h"
+#import "AlertView.h"
 
 @interface MainViewController : UIViewController <FlipsideViewControllerDelegate>
 
@@ -36,6 +37,9 @@
 @property (strong, nonatomic) CalculatorView *calculatorView;
 @property (strong, nonatomic) AboutView *aboutView;
 @property (strong, nonatomic) UIView *menuButtonView;
+@property (strong, nonatomic) AlertView *alertView;
+@property (strong, nonatomic) MtGox *mtGox;
+@property (strong, nonatomic) NSTimer *goxTimer;
 
 @property (nonatomic) BOOL loggedIn;
 @property (nonatomic) BOOL toggleMenuBool;
@@ -50,12 +54,14 @@
 - (void)toggleMenuView;
 - (void)showMenu;
 - (void)hideMenu;
+- (void)showAlert:(NSString *)alert;
 - (void)hideAllViews;
 - (void)hideAllFullViews;
 - (void)presentHomeView;
 - (void)presentTradeView;
 - (void)presentCalculatorView;
 - (void)presentAboutView;
+- (void)refreshData;
 
 @end
 

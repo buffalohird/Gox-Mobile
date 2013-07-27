@@ -32,11 +32,19 @@
 @synthesize loggedIn = _loggedIn;
 @synthesize toggleMenuBool = _toggleMenuBool;
 @synthesize toggleBalanceBool = _toggleBalanceBool;
+@synthesize alertView = _alertView;
+@synthesize mtGox = _mtGox;
+@synthesize goxTimer = _goxTimer;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
+    NSString *newKey = @"new key";
+    NSString *newSecret = @"new secret";
+    //NSLog([NSString stringWithFormat:@"Key: %@, Secret: %@", self.mtGox.key, self.mtGox.secret]);
+    self.mtGox = [[MtGox alloc] initWithKey:newKey andSecret:newSecret];
     
     self.menuView = [[MenuView alloc] init];
     [self.menuView setUp];
@@ -118,11 +126,15 @@
     [self.askView createOrderView:CGRectMake(0.0, 280.0, self.view.bounds.size.width, 175.0) andName:@"Asks"];
     [self.view insertSubview:self.askView belowSubview:self.menuView];
     
+    self.alertView = [[AlertView alloc] init];
+    [self.alertView createAlertView];
+    [self.view insertSubview:self.alertView aboveSubview:self.menuView];
+    
     self.tradeView = [[TradeView alloc] init];
     [self.tradeView createTradeView];
     
     self.calculatorView = [[CalculatorView alloc] init];
-    [self.calculatorView createCalculatorView];
+    [self.calculatorView createCalculatorView: self.mtGox];
     
     self.aboutView = [[AboutView alloc] init];
     [self.aboutView createAboutView];
@@ -132,13 +144,11 @@
     [self.view insertSubview:self.aboutView belowSubview:self.menuView];
     
 
-    NSString *newKey = @"new key";
-    NSString *newSecret = @"new secret";
-    MtGox *mtGox = [[MtGox alloc] initWithKey:newKey andSecret:newSecret];
-    NSLog([NSString stringWithFormat:@"Key: %@, Secret: %@", mtGox.key, mtGox.secret]);
-    
-    self.loggedIn = FALSE;
+    self.goxTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
+        
+    self.loggedIn = YES;
     [self checkLogin];
+    
     
 }
 
@@ -202,7 +212,7 @@
 - (void)presentLogin
 {
     LoginViewController *loginViewController = [[LoginViewController alloc] init];
-    //[loginViewController setMainViewController:self];
+    loginViewController.mtGox = self.mtGox;
     loginViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:loginViewController animated:YES completion:nil];
     
@@ -248,10 +258,17 @@
     
 }
 
+- (void)showAlert:(NSString *)alert
+{
+    
+    
+}
+
 -(void)hideAllViews
 {
     [self hideMenu];
     [self hideBalance];
+    
     
 }
 
@@ -296,6 +313,7 @@
     [self.tradeView setHidden:YES];
     [self.calculatorView setHidden:YES];
     [self.aboutView setHidden:YES];
+    [self.view endEditing:YES];
     
 }
 
@@ -317,6 +335,28 @@
     if ([[segue identifier] isEqualToString:@"showAlternate"]) {
         [[segue destinationViewController] setDelegate:self];
     }
+}
+
+- (void)refreshData
+{
+    [self.mtGox refreshData];
+    //self.balanceView.currentPriceItem.
+    float newLast = self.mtGox.lastPrice;
+    float oldLast = [self.currencyNavButton.title floatValue];
+    if(newLast > oldLast)
+        self.currencyNavButton.tintColor = [UIColor greenColor];
+    else if(newLast < oldLast)
+        self.currencyNavButton.tintColor = [UIColor redColor];
+    else
+        self.currencyNavButton.tintColor = [UIColor yellowColor];
+    
+    self.currencyNavButton.title = @" ";
+    self.currencyNavButton.title =  [NSString stringWithFormat:@"%f", newLast];
+    
+    [self.calculatorView refreshData];
+    [self.tradeView refreshData];
+    [self.aboutView refreshData];
+    
 }
 
 @end

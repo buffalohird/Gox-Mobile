@@ -151,4 +151,11 @@
     [mtgox callURL:@"https://data.mtgox.com/api/2/BTCUSD/money/ticker_fast"];
 }
 
+- (void) refreshData
+{
+    
+    
+    
+}
+
 @end
