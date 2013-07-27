@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+#import "MtGox.h"
 
 @interface TradeView : UIView
 
 - (TradeView *)createTradeView;
+- (void) printQuote;
 
 @end

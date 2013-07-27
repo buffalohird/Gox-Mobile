@@ -19,4 +19,6 @@
 
 - (id)initWithKey:(NSString *)key andSecret:(NSString *)secret;
 
+- (int)callURL:(NSString *)urlString;
+
 @end
