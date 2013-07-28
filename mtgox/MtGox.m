@@ -94,7 +94,6 @@
     NSString *currentStringEnd = @"BTCUSD/money/ticker";
     NSString *currentString = [NSString stringWithFormat:@"%@%@", self.base, currentStringEnd];
     NSDictionary *currentDictionary = [self callURL:currentString];
-    NSLog(@"%@", currentDictionary);
     
     self.lastPrice = [currentDictionary[@"last"][@"value"] floatValue];
     
@@ -130,6 +129,12 @@
     int checkUpdateMarket = [self updateMarketData];
     if(checkUpdateMarket != 0)
         NSLog(@"MTGOX: error updating market, error code %d given", checkUpdateMarket);
+
+    
+    /*int checkUpdateOrder = [self updateOrderData];
+    if(checkUpdateOrder != 0)
+        NSLog(@"MTGOX: error updating order, error code %d given", checkUpdateOrder);
+     */
     
     
     NSLog(@"hello");
