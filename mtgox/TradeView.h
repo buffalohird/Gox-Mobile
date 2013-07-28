@@ -12,12 +12,14 @@
 
 @interface TradeView : UIView
 
+@property (nonatomic, strong) MtGox *mtGox;
+
 @property (nonatomic, strong) UITextField *orderSizeInput;
 @property (nonatomic, strong) UITextField *orderPriceInput;
 @property (nonatomic, strong) UITextField *orderTotalInput;
 
 
-- (TradeView *)createTradeView;
+- (TradeView *)createTradeView:(MtGox *)mtGox;
 - (void) printQuote;
 - (void)refreshData;
 - (void) calcOrder: (UIButton *) clickedSection;

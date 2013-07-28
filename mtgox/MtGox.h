@@ -17,13 +17,26 @@
 @property (strong, nonatomic) NSString* base;
 @property (strong, nonatomic) NSString* time;
 
+//***** outward API values *****
+
+// read-write
+@property (nonatomic) BOOL loggedIn;
+// read-only
 @property (nonatomic) float lastPrice;
+@property (nonatomic) float dollarBalance;
+@property (nonatomic) float bitcoinBalance;
+@property (nonatomic) float monthlyVolume;
+@property (nonatomic) float tradeFee;
+@property (nonatomic, strong) NSString * language;
+
 
 - (id)initWithKey:(NSString *)key andSecret:(NSString *)secret;
 
 - (NSDictionary *)callURL:(NSString *)urlString;
 - (NSDictionary *)handleJsonData:(NSData *)data;
-- (float)currentPrice;
+- (int)updateUserData;
+- (int)updateMarketData;
+- (int)updateOrderData;
 - (NSString *)refreshData;
 - (NSString *)getInfo;
 

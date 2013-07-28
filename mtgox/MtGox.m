@@ -17,7 +17,13 @@
 @synthesize base = _base;
 @synthesize time = _time;
 
+@synthesize loggedIn = _loggedIn;
 @synthesize lastPrice = _lastPrice;
+@synthesize dollarBalance = _dollarBalance;
+@synthesize bitcoinBalance = _bitcoinBalance;
+@synthesize monthlyVolume = _monthlyVolume;
+@synthesize tradeFee = _tradeFee;
+@synthesize language = _language;
 
 // pretty stock setup function
 - (id)initWithKey:(NSString *)key andSecret:(NSString *)secret
@@ -66,23 +72,64 @@
     return 0;
 }
 
-- (float)currentPrice
+
+- (int)updateUserData
+{
+    NSString *userStringEnd = @"BTCUSD/money/info";
+    NSString *userString = [NSString stringWithFormat:@"%@%@", self.base, userStringEnd];
+    NSDictionary *userDictionary = [self callURL:userString];
+    
+    self.dollarBalance = [userDictionary[@"Wallets"][@"USD"][@"Balance"] floatValue];
+    self.bitcoinBalance = [userDictionary[@"Wallets"][@"BTC"][@"Balance"] floatValue];
+    self.monthlyVolume = [userDictionary[@"Monthly_Volume"] floatValue];
+    self.tradeFee = [userDictionary[@"Trade_Fee"] floatValue];
+    self.language = userDictionary[@"Language"];
+
+
+    return 0;
+}
+
+- (int)updateMarketData
 {
     NSString *currentStringEnd = @"BTCUSD/money/ticker";
     NSString *currentString = [NSString stringWithFormat:@"%@%@", self.base, currentStringEnd];
     NSDictionary *currentDictionary = [self callURL:currentString];
+    NSLog(@"%@", currentDictionary);
     
-    NSMutableDictionary *returnDictionary = [[NSMutableDictionary alloc] init];
-    returnDictionary[@"last"] = currentDictionary[@"last"];
+    self.lastPrice = [currentDictionary[@"last"][@"value"] floatValue];
     
-    float lastPrice = [currentDictionary[@"last"][@"value"] floatValue];
     
-    return lastPrice;
+    return 0;
+}
+
+- (int)updateOrderData
+{
+    NSString *orderStringEnd = @"BTCUSD/money/ticker"; // add the correct call to receive new orders
+    NSString *orderString = [NSString stringWithFormat:@"%@%@", self.base, orderStringEnd];
+    NSDictionary *orderDictionary = [self callURL:orderString];
+    
+    // insert order updates here
+    
+    
+    return 0;
 }
 
 - (NSString *)refreshData
 {
-    self.lastPrice = [self currentPrice];
+    if(self.loggedIn)
+    {
+        /*int checkUpdateUser = [self updateUserData];
+        if(checkUpdateUser != 0)
+            NSLog(@"MTGOX: error updating user, error code %d given", checkUpdateUser);*/
+    }
+    else
+    {
+        
+    }
+    
+    int checkUpdateMarket = [self updateMarketData];
+    if(checkUpdateMarket != 0)
+        NSLog(@"MTGOX: error updating market, error code %d given", checkUpdateMarket);
     
     
     NSLog(@"hello");

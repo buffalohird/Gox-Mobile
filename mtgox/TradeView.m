@@ -10,6 +10,7 @@
 
 @implementation TradeView
 
+@synthesize mtGox = _mtGox;
 @synthesize orderSizeInput = _orderSizeInput;
 @synthesize orderPriceInput = _orderPriceInput;
 @synthesize orderTotalInput = _orderTotalInput;
@@ -23,7 +24,7 @@
     return self;
 }
 
-- (TradeView *)createTradeView
+- (TradeView *)createTradeView:(MtGox *)mtGox
 {
     self.frame = CGRectMake(0.0, 44.0, 320.0, 436.0);
     self.backgroundColor = [UIColor blackColor];

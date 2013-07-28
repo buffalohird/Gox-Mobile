@@ -29,12 +29,12 @@
 @synthesize calculatorView = _calculatorView;
 @synthesize aboutView = _aboutView;
 @synthesize menuButtonView = _menuButtonView;
-@synthesize loggedIn = _loggedIn;
 @synthesize toggleMenuBool = _toggleMenuBool;
 @synthesize toggleBalanceBool = _toggleBalanceBool;
 @synthesize alertView = _alertView;
 @synthesize mtGox = _mtGox;
 @synthesize goxTimer = _goxTimer;
+@synthesize timerInterval = _timerInterval;
 
 - (void)viewDidLoad
 {
@@ -90,7 +90,7 @@
     [navBarTapView addGestureRecognizer:menuTapGestureRecognizer];
     
     self.balanceView = [[BalanceView alloc] init];
-    [self.balanceView setUp];
+    [self.balanceView setUp:self.mtGox];
     [self.view insertSubview:self.balanceView belowSubview:self.navBar];
     //[self.balanceView setHidden:TRUE];
     self.balanceView.alpha = 0;
@@ -131,23 +131,26 @@
     [self.view insertSubview:self.alertView aboveSubview:self.menuView];
     
     self.tradeView = [[TradeView alloc] init];
-    [self.tradeView createTradeView];
+    [self.tradeView createTradeView: self.mtGox];
     
     self.calculatorView = [[CalculatorView alloc] init];
     [self.calculatorView createCalculatorView: self.mtGox];
     
     self.aboutView = [[AboutView alloc] init];
-    [self.aboutView createAboutView];
+    [self.aboutView createAboutView: self.mtGox];
     
     [self.view insertSubview:self.tradeView belowSubview:self.menuView];
     [self.view insertSubview:self.calculatorView belowSubview:self.menuView];
     [self.view insertSubview:self.aboutView belowSubview:self.menuView];
     
-
-    self.goxTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
-        
-    self.loggedIn = YES;
+    self.timerInterval = 5.0;
+    
+    
+    self.mtGox.loggedIn = YES; // temporary code
     [self checkLogin];
+    [self refreshData];
+    
+    self.goxTimer = [NSTimer scheduledTimerWithTimeInterval:self.timerInterval target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
     
     
 }
@@ -155,7 +158,7 @@
 
 - (IBAction)currencyNavButtonPressed:(id)sender
 {
-    if(self.loggedIn){
+    if(self.mtGox.loggedIn){
         [self displayBalances];
     }
     else
@@ -166,7 +169,7 @@
 
 - (void)checkLogin
 {
-    if(self.loggedIn)
+    if(self.mtGox.loggedIn)
         self.currencyNavButton.title = @"$$";
     else
         self.currencyNavButton.title = @"Login";
@@ -244,6 +247,8 @@
     [UIView setAnimationDuration:0.4f];
     self.menuView.frame = CGRectMake(0.0, MENUDOWNY, MENUWIDTH, MENUHEIGHT);
     [UIView commitAnimations];
+    
+    [self showAlert:@"hello"];
        
 }
 
@@ -255,11 +260,20 @@
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
     [UIView setAnimationDuration:0.4f];
     self.menuView.frame = CGRectMake(0.0, MENUUPY, MENUWIDTH, MENUHEIGHT);
+    [UIView commitAnimations];
     
 }
 
 - (void)showAlert:(NSString *)alert
 {
+    [self.alertView setAlpha:1.0];
+    [UIView beginAnimations:@"MoveView" context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+    [UIView setAnimationDuration:1.0f];
+    [self.alertView setAlpha:0.0];
+    [UIView commitAnimations];
+    
+    
     
     
 }
@@ -339,10 +353,12 @@
 
 - (void)refreshData
 {
+    // update models
     [self.mtGox refreshData];
-    //self.balanceView.currentPriceItem.
+    
+    // update main
     float newLast = self.mtGox.lastPrice;
-    float oldLast = [self.currencyNavButton.title floatValue];
+    float oldLast = [[self.currencyNavButton.title stripedOfSymbols] floatValue];
     if(newLast > oldLast)
         self.currencyNavButton.tintColor = [UIColor greenColor];
     else if(newLast < oldLast)
@@ -351,8 +367,13 @@
         self.currencyNavButton.tintColor = [UIColor yellowColor];
     
     self.currencyNavButton.title = @" ";
-    self.currencyNavButton.title =  [NSString stringWithFormat:@"%f", newLast];
+    self.currencyNavButton.title =  [NSString stringWithFormat:@"$%f", newLast];
     
+    // update top views
+    [self.balanceView refreshData];
+    
+    
+    // update independent views
     [self.calculatorView refreshData];
     [self.tradeView refreshData];
     [self.aboutView refreshData];

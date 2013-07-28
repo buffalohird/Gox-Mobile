@@ -13,4 +13,6 @@
  
 -(MenuView *)setUp;
 -(MenuButtonView *)addMenuButton:(float)buttonTop withIndex:(int)index;
+-(void)refreshData;
+
 @end

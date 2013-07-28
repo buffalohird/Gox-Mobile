@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MtGox.h"
 
 @interface AboutView : UIView
 
-- (AboutView *)createAboutView;
+@property (nonatomic, strong) MtGox *mtGox;
+
+- (AboutView *)createAboutView:(MtGox *)mtGox;
 - (void)refreshData;
 
 @end

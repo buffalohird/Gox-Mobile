@@ -12,6 +12,7 @@
 		9E76AF8417A2132400039ECA /* OrderViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E76AF8317A2132400039ECA /* OrderViewItem.m */; };
 		9E76AF8717A215F400039ECA /* OrderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E76AF8617A215F400039ECA /* OrderView.m */; };
 		9E76AF8A17A21BA800039ECA /* OrderHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E76AF8917A21BA800039ECA /* OrderHeader.m */; };
+		9E870CE617A497BB00C3B3CB /* NSString+StripedFloat.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E870CE517A497BB00C3B3CB /* NSString+StripedFloat.m */; };
 		9E95C10817A373D3004FDBEA /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E95C10717A373D3004FDBEA /* AlertView.m */; };
 		9EA3688A179C620800289662 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA36889179C620800289662 /* UIKit.framework */; };
 		9EA3688C179C620800289662 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9EA3688B179C620800289662 /* Foundation.framework */; };
@@ -68,6 +69,8 @@
 		9E76AF8617A215F400039ECA /* OrderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderView.m; sourceTree = "<group>"; };
 		9E76AF8817A21BA800039ECA /* OrderHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHeader.h; sourceTree = "<group>"; };
 		9E76AF8917A21BA800039ECA /* OrderHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHeader.m; sourceTree = "<group>"; };
+		9E870CE417A497BB00C3B3CB /* NSString+StripedFloat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+StripedFloat.h"; sourceTree = "<group>"; };
+		9E870CE517A497BB00C3B3CB /* NSString+StripedFloat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+StripedFloat.m"; sourceTree = "<group>"; };
 		9E95C10617A373D3004FDBEA /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
 		9E95C10717A373D3004FDBEA /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
 		9EA36886179C620800289662 /* mtgox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mtgox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +183,15 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		9E870CE717A49C3A00C3B3CB /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				9E870CE417A497BB00C3B3CB /* NSString+StripedFloat.h */,
+				9E870CE517A497BB00C3B3CB /* NSString+StripedFloat.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		9EA3687D179C620800289662 = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +229,7 @@
 			children = (
 				9EA3689A179C620800289662 /* AppDelegate.h */,
 				9EA3689B179C620800289662 /* AppDelegate.m */,
+				9E870CE717A49C3A00C3B3CB /* Categories */,
 				9EA368D0179C634800289662 /* Models */,
 				9EA368A3179C620800289662 /* MainStoryboard.storyboard */,
 				9EA368A9179C620800289662 /* MainViewController.h */,
@@ -409,6 +422,7 @@
 				9E76AF8717A215F400039ECA /* OrderView.m in Sources */,
 				9E76AF8A17A21BA800039ECA /* OrderHeader.m in Sources */,
 				9E95C10817A373D3004FDBEA /* AlertView.m in Sources */,
+				9E870CE617A497BB00C3B3CB /* NSString+StripedFloat.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

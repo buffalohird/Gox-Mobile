@@ -21,8 +21,11 @@
 
 - (AlertView *)createAlertView
 {
+    self.frame = CGRectMake(75.0, 50.0, 170.0, 40.0);
+    self.backgroundColor = [UIColor whiteColor];
     
-    [self setHidden:YES];
+    [self setAlpha:0.0];
+    
     return self;
 }
 

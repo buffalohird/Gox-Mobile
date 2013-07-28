@@ -7,6 +7,7 @@
 //
 
 #import "FlipsideViewController.h"
+#import "NSString+StripedFloat.h"
 
 #import <CoreData/CoreData.h>
 #import <QuartzCore/QuartzCore.h>
@@ -41,9 +42,9 @@
 @property (strong, nonatomic) MtGox *mtGox;
 @property (strong, nonatomic) NSTimer *goxTimer;
 
-@property (nonatomic) BOOL loggedIn;
 @property (nonatomic) BOOL toggleMenuBool;
 @property (nonatomic) BOOL toggleBalanceBool;
+@property (nonatomic) float timerInterval;
 
 
 - (IBAction)currencyNavButtonPressed:(id)sender;

@@ -10,6 +10,8 @@
 
 @implementation AboutView
 
+@synthesize mtGox = _mtGox;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -19,8 +21,10 @@
     return self;
 }
 
-- (AboutView *)createAboutView
+- (AboutView *)createAboutView:(MtGox *)mtGox
 {
+    self.mtGox = mtGox;
+    
     self.frame = CGRectMake(0.0, 44.0, 320.0, 436.0);
     self.backgroundColor = [UIColor blackColor];
     
