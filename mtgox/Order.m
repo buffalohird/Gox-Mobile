@@ -25,15 +25,4 @@
     return self;
 }
 
-- (NSArray *)combineOrders:(NSArray *)orderArray
-{
-    NSArray *returnArray = [[NSArray alloc] init];
-    for(NSDictionary *order in orderArray)
-    {
-        
-        
-    }
-    
-    return returnArray;
-}
 @end

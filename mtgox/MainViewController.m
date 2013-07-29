@@ -109,21 +109,13 @@
     [emptyTapView addGestureRecognizer:emptyTapGestureRecognizer];
     
     self.bidView = [[OrderView alloc] init];
-    [self.bidView createOrderView:CGRectMake(0.0, 100.0, self.view.bounds.size.width, 175.0) andName:@"Bids"];
+    [self.bidView createOrderView:CGRectMake(0.0, 100.0, self.view.bounds.size.width, 175.0) andName:@"Bids" andGox:self.mtGox];
     [self.view insertSubview:self.bidView belowSubview:self.menuView];
     
-    OrderViewItem *orderViewItem = [[OrderViewItem alloc] init];
-    [orderViewItem createOrderView:CGRectMake(0.0, 40.0, 320.0, 40.0)];
-    [self.bidView addSubview:orderViewItem];
-    OrderViewItem *orderViewItem2 = [[OrderViewItem alloc] init];
-    [orderViewItem2 createOrderView:CGRectMake(0.0, 81.0, 320.0, 40.0)];
-    [self.bidView addSubview:orderViewItem2];
-    OrderViewItem *orderViewItem3 = [[OrderViewItem alloc] init];
-    [orderViewItem3 createOrderView:CGRectMake(0.0, 123.0, 320.0, 40.0)];
-    [self.bidView addSubview:orderViewItem3];
     
+
     self.askView = [[OrderView alloc] init];
-    [self.askView createOrderView:CGRectMake(0.0, 280.0, self.view.bounds.size.width, 175.0) andName:@"Asks"];
+    [self.askView createOrderView:CGRectMake(0.0, 280.0, self.view.bounds.size.width, 175.0) andName:@"Asks" andGox:self.mtGox];
     [self.view insertSubview:self.askView belowSubview:self.menuView];
     
     self.alertView = [[AlertView alloc] init];
@@ -370,6 +362,12 @@
     
     [self showAlert:@"hello" withType:0];
     
+    // update orders
+    if(self.mtGox.counter) {
+        [self.bidView refreshData:0];
+        [self.askView refreshData:1];
+    }
+        
     // update top views
     [self.balanceView refreshData];
     
@@ -379,6 +377,8 @@
     [self.tradeView refreshData];
     [self.aboutView refreshData];
     
+    // update database counter for conditional updates
+    self.mtGox.counter++;
 }
 
 @end

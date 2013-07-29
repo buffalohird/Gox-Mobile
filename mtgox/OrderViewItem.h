@@ -11,5 +11,9 @@
 
 @interface OrderViewItem : UIView
 
+@property (nonatomic, strong) UILabel *priceLabel;
+@property (nonatomic, strong) UILabel *sizeLabel;
+@property (nonatomic, strong) UILabel *totalLabel;
+
 - (OrderViewItem *)createOrderView:(CGRect)frame;
 @end

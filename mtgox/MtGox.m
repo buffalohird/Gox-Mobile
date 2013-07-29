@@ -100,12 +100,11 @@
 
 - (int)updateMarketData
 {
-    NSString *currentStringEnd = @"BTCUSD/money/depth/fetch";
+    NSString *currentStringEnd = @"BTCUSD/money/ticker";
     NSString *currentString = [NSString stringWithFormat:@"%@%@", self.base, currentStringEnd];
     NSDictionary *currentDictionary = [self callURL:currentString];
     
-    self.asks = currentDictionary[@"asks"];
-    self.bids = currentDictionary[@"asks"];
+    self.lastPrice = [currentDictionary[@"last"][@"value"] floatValue];
     
     
     return 0;
@@ -113,11 +112,14 @@
 
 - (int)updateOrderData
 {
-    NSString *orderStringEnd = @"BTCUSD/money/ticker"; // add the correct call to receive new orders
+    NSString *orderStringEnd = @"BTCUSD/money/depth/fetch"; // add the correct call to receive new orders
     NSString *orderString = [NSString stringWithFormat:@"%@%@", self.base, orderStringEnd];
     NSDictionary *orderDictionary = [self callURL:orderString];
     
     // insert order updates here
+    
+    self.asks = orderDictionary[@"asks"];
+    self.bids = [[orderDictionary[@"bids"] reverseObjectEnumerator] allObjects];
     
     
     return 0;
@@ -151,13 +153,13 @@
         int checkUpdateOrder = [self updateOrderData];
         if(checkUpdateOrder != 0)
             NSLog(@"MTGOX: error updating order, error code %d given", checkUpdateOrder);
-        NSLog(@"\n\n%@\n\n", self.asks);
-        NSLog(@"\n\n%@\n\n", self.bids);
+        //NSLog(@"\n\n%@\n\n", self.asks);
+        //NSLog(@"\n\n%@\n\n", self.bids);
         
     }
          
     
-    self.counter++;
+    //self.counter++;
     NSLog(@"gox counter: %d", self.counter);
     return @"hello";
 }
