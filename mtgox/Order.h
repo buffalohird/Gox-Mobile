@@ -15,5 +15,6 @@
 @property (nonatomic) float total;
 
 - (id)initWithPrice:(float)price andSize:(float)size andTotal:(float)total;
+- (NSArray *)combineOrders:(NSArray *)orderArray;
 
 @end

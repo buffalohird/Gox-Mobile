@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSString* reqs;
 @property (strong, nonatomic) NSString* base;
 @property (strong, nonatomic) NSString* time;
+@property (nonatomic) int counter;
 
 //***** outward API values *****
 
@@ -27,7 +28,10 @@
 @property (nonatomic) float bitcoinBalance;
 @property (nonatomic) float monthlyVolume;
 @property (nonatomic) float tradeFee;
-@property (nonatomic, strong) NSString * language;
+@property (nonatomic, strong) NSString *language;
+@property (nonatomic, strong) NSArray *rights;
+@property (nonatomic, strong) NSArray *asks;
+@property (nonatomic, strong) NSArray *bids;
 
 
 - (id)initWithKey:(NSString *)key andSecret:(NSString *)secret;

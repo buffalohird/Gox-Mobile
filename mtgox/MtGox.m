@@ -16,7 +16,10 @@
 @synthesize reqs = _reqs;
 @synthesize base = _base;
 @synthesize time = _time;
+@synthesize counter = _counter;
 
+
+// public
 @synthesize loggedIn = _loggedIn;
 @synthesize lastPrice = _lastPrice;
 @synthesize dollarBalance = _dollarBalance;
@@ -24,6 +27,10 @@
 @synthesize monthlyVolume = _monthlyVolume;
 @synthesize tradeFee = _tradeFee;
 @synthesize language = _language;
+@synthesize rights = _rights;
+@synthesize asks = _asks;
+@synthesize bids = _bids;
+
 
 // pretty stock setup function
 - (id)initWithKey:(NSString *)key andSecret:(NSString *)secret
@@ -34,6 +41,7 @@
     self.key = key;
     self.secret = secret;
     self.base = @"https://data.mtgox.com/api/2/";
+    self.counter = 0;
     
     return self;
 }
@@ -79,11 +87,12 @@
     NSString *userString = [NSString stringWithFormat:@"%@%@", self.base, userStringEnd];
     NSDictionary *userDictionary = [self callURL:userString];
     
-    self.dollarBalance = [userDictionary[@"Wallets"][@"USD"][@"Balance"] floatValue];
-    self.bitcoinBalance = [userDictionary[@"Wallets"][@"BTC"][@"Balance"] floatValue];
-    self.monthlyVolume = [userDictionary[@"Monthly_Volume"] floatValue];
+    self.dollarBalance = [userDictionary[@"Wallets"][@"USD"][@"Balance"][@"Value"] floatValue];
+    self.bitcoinBalance = [userDictionary[@"Wallets"][@"BTC"][@"Balance"][@"Value"] floatValue];
+    self.monthlyVolume = [userDictionary[@"Monthly_Volume"][@"Value"] floatValue];
     self.tradeFee = [userDictionary[@"Trade_Fee"] floatValue];
     self.language = userDictionary[@"Language"];
+    self.rights = userDictionary[@"Rights"];
 
 
     return 0;
@@ -91,11 +100,12 @@
 
 - (int)updateMarketData
 {
-    NSString *currentStringEnd = @"BTCUSD/money/ticker";
+    NSString *currentStringEnd = @"BTCUSD/money/depth/fetch";
     NSString *currentString = [NSString stringWithFormat:@"%@%@", self.base, currentStringEnd];
     NSDictionary *currentDictionary = [self callURL:currentString];
     
-    self.lastPrice = [currentDictionary[@"last"][@"value"] floatValue];
+    self.asks = currentDictionary[@"asks"];
+    self.bids = currentDictionary[@"asks"];
     
     
     return 0;
@@ -117,27 +127,38 @@
 {
     if(self.loggedIn)
     {
-        /*int checkUpdateUser = [self updateUserData];
-        if(checkUpdateUser != 0)
-            NSLog(@"MTGOX: error updating user, error code %d given", checkUpdateUser);*/
+        
+        /*
+        if(self.counter % 20 == 0)
+        {
+            int checkUpdateUser = [self updateUserData];
+            if(checkUpdateUser != 0)
+                NSLog(@"MTGOX: error updating user, error code %d given", checkUpdateUser);
+        }*/
     }
     else
     {
         
     }
     
+
     int checkUpdateMarket = [self updateMarketData];
     if(checkUpdateMarket != 0)
         NSLog(@"MTGOX: error updating market, error code %d given", checkUpdateMarket);
-
     
-    /*int checkUpdateOrder = [self updateOrderData];
-    if(checkUpdateOrder != 0)
-        NSLog(@"MTGOX: error updating order, error code %d given", checkUpdateOrder);
-     */
+    if(self.counter % 20 == 0)
+    {
+        int checkUpdateOrder = [self updateOrderData];
+        if(checkUpdateOrder != 0)
+            NSLog(@"MTGOX: error updating order, error code %d given", checkUpdateOrder);
+        NSLog(@"\n\n%@\n\n", self.asks);
+        NSLog(@"\n\n%@\n\n", self.bids);
+        
+    }
+         
     
-    
-    NSLog(@"hello");
+    self.counter++;
+    NSLog(@"gox counter: %d", self.counter);
     return @"hello";
 }
 

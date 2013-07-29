@@ -102,7 +102,9 @@
 
 - (void)refreshData
 {
-    self.currentPriceItem.balanceValueLabel.text = [NSString stringWithFormat:@"  %f", self.mtGox.lastPrice];
+    self.currentPriceItem.balanceValueLabel.text = [NSString stringWithFormat:@"  $%f", self.mtGox.lastPrice];
+    self.currentBitcoinItem.balanceValueLabel.text = [NSString stringWithFormat:@"  $%f", self.mtGox.bitcoinBalance];
+    self.currentDollarsItem.balanceValueLabel.text = [NSString stringWithFormat:@"  $%f", self.mtGox.dollarBalance];
     
 }
 

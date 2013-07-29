@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface AlertView : UIView
 
+@property (nonatomic, strong) UILabel *label;
+
 - (AlertView *)createAlertView;
+- (void)createAlert:(NSString *)alert withType:(int)type;
+
+
 
 @end

@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "BalanceViewItem.h"
 #import "MtGox.h"
+#import "NSString+StripedFloat.h"
 
 @interface BalanceView : UIView
 

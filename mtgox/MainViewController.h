@@ -55,7 +55,7 @@
 - (void)toggleMenuView;
 - (void)showMenu;
 - (void)hideMenu;
-- (void)showAlert:(NSString *)alert;
+- (void)showAlert:(NSString *)alert withType:(int)type;
 - (void)hideAllViews;
 - (void)hideAllFullViews;
 - (void)presentHomeView;

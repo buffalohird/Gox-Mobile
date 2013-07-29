@@ -247,9 +247,7 @@
     [UIView setAnimationDuration:0.4f];
     self.menuView.frame = CGRectMake(0.0, MENUDOWNY, MENUWIDTH, MENUHEIGHT);
     [UIView commitAnimations];
-    
-    [self showAlert:@"hello"];
-       
+           
 }
 
 -(void)hideMenu
@@ -264,12 +262,13 @@
     
 }
 
-- (void)showAlert:(NSString *)alert
+- (void)showAlert:(NSString *)alert withType:(int)type
 {
-    [self.alertView setAlpha:1.0];
+    [self.alertView setAlpha:0.85];
+    [self.alertView createAlert:alert withType:0];
     [UIView beginAnimations:@"MoveView" context:nil];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-    [UIView setAnimationDuration:1.0f];
+    [UIView setAnimationDuration:1.25f];
     [self.alertView setAlpha:0.0];
     [UIView commitAnimations];
     
@@ -368,6 +367,8 @@
     
     self.currencyNavButton.title = @" ";
     self.currencyNavButton.title =  [NSString stringWithFormat:@"$%f", newLast];
+    
+    [self showAlert:@"hello" withType:0];
     
     // update top views
     [self.balanceView refreshData];
