@@ -34,6 +34,7 @@
     self.showsVerticalScrollIndicator = YES;
     self.showsHorizontalScrollIndicator = NO;
     self.scrollEnabled = YES;
+    [self setUserInteractionEnabled:YES];
     
     self.header = [[OrderHeader alloc] init];
     [self.header createOrderHeader:self.name];

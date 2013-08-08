@@ -44,6 +44,8 @@
 
 @property (nonatomic) BOOL toggleMenuBool;
 @property (nonatomic) BOOL toggleBalanceBool;
+@property (nonatomic) BOOL toggleBidBool;
+@property (nonatomic) BOOL toggleAskBool;
 @property (nonatomic) float timerInterval;
 
 
@@ -63,6 +65,12 @@
 - (void)presentCalculatorView;
 - (void)presentAboutView;
 - (void)refreshData;
+- (void)toggleBidZoom;
+- (void)showBidZoom;
+- (void)hideBidZoom;
+- (void)toggleAskZoom;
+- (void)showAskZoom;
+- (void)hideAskZoom;
 
 @end
 

@@ -103,7 +103,7 @@
     menuTapGestureRecognizer.numberOfTapsRequired = 1;
     CGRect emptyFrame = CGRectMake(0, 0, 320, 480);
     TransparentView *emptyTapView = [[TransparentView alloc] initWithFrame:emptyFrame];
-    [self.view insertSubview:emptyTapView belowSubview: self.menuView];
+    //[self.view insertSubview:emptyTapView belowSubview: self.menuView];
     emptyTapView.backgroundColor = [UIColor clearColor];
     [emptyTapView setUserInteractionEnabled:YES];
     [emptyTapView addGestureRecognizer:emptyTapGestureRecognizer];
@@ -112,11 +112,19 @@
     [self.bidView createOrderView:CGRectMake(0.0, 100.0, self.view.bounds.size.width, 175.0) andName:@"Bids" andGox:self.mtGox];
     [self.view insertSubview:self.bidView belowSubview:self.menuView];
     
+    UITapGestureRecognizer *bidTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleBidZoom)];
+    bidTapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.bidView addGestureRecognizer:bidTapGestureRecognizer];
+    
     
 
     self.askView = [[OrderView alloc] init];
     [self.askView createOrderView:CGRectMake(0.0, 280.0, self.view.bounds.size.width, 175.0) andName:@"Asks" andGox:self.mtGox];
     [self.view insertSubview:self.askView belowSubview:self.menuView];
+    
+    UITapGestureRecognizer *askTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleAskZoom)];
+    askTapGestureRecognizer.numberOfTapsRequired = 1;
+    [self.askView addGestureRecognizer:askTapGestureRecognizer];
     
     self.alertView = [[AlertView alloc] init];
     [self.alertView createAlertView];
@@ -218,12 +226,12 @@
 {
     if(self.toggleMenuBool){
         NSLog(@"hiding menu view");
-        [self hideBalance];
+        [self hideAllViews];
         [self hideMenu];
     }
     else {
         NSLog(@"showing menu view");
-        [self hideBalance];
+        [self hideAllViews];
         [self showMenu];
     }
     
@@ -273,6 +281,8 @@
 {
     [self hideMenu];
     [self hideBalance];
+    [self hideAskZoom];
+    [self hideBidZoom];
     
     
 }
@@ -322,6 +332,60 @@
     
 }
 
+- (void)toggleBidZoom
+{
+    if(self.toggleBidBool)
+        [self hideBidZoom];
+    else
+        [self showBidZoom];
+    
+}
+
+- (void)showBidZoom
+{
+    [self hideAllViews];
+    self.toggleBidBool = YES;
+    [self.view bringSubviewToFront:self.bidView];
+    self.bidView.frame = CGRectMake(0.0, 44.0, self.view.bounds.size.width, 436.0);
+   
+    
+    
+}
+- (void)hideBidZoom
+{
+    self.toggleBidBool = NO;
+    [self.view sendSubviewToBack: self.bidView];
+    self.bidView.frame = CGRectMake(0.0, 100.0, self.view.bounds.size.width, 175.0);
+    
+}
+
+- (void)toggleAskZoom
+{
+    if(self.toggleAskBool)
+        [self hideAskZoom];
+    else
+        [self showAskZoom];
+    
+}
+
+- (void)showAskZoom
+{
+    [self hideAllViews];
+    self.toggleAskBool = YES;
+    [self.view bringSubviewToFront:self.askView];
+    self.askView.frame = CGRectMake(0.0, 44.0, self.view.bounds.size.width, 436.0);
+    
+    
+}
+
+- (void)hideAskZoom
+{
+    self.toggleAskBool = NO;
+    [self.view sendSubviewToBack: self.askView];
+    self.askView.frame = CGRectMake(0.0, 280.0, self.view.bounds.size.width, 175.0);
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -363,7 +427,7 @@
     [self showAlert:@"hello" withType:0];
     
     // update orders
-    if(self.mtGox.counter) {
+    if(self.mtGox.counter % 20 == 0) {
         [self.bidView refreshData:0];
         [self.askView refreshData:1];
     }
@@ -380,5 +444,6 @@
     // update database counter for conditional updates
     self.mtGox.counter++;
 }
+
 
 @end
